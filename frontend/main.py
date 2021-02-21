@@ -1,52 +1,39 @@
-import time
-
-import requests
 import streamlit as st
-from PIL import Image
+from multiapp import MultiApp
+from apps import home, how_it_works # import your app modules here
 
-STYLES = {
-    "candy": "candy",
-    "composition 6": "composition_vii",
-    "feathers": "feathers",
-    "la_muse": "la_muse",
-    "mosaic": "mosaic",
-    "starry night": "starry_night",
-    "the scream": "the_scream",
-    "the wave": "the_wave",
-    "udnie": "udnie",
-}
+# CONFIGURATIONS
+# Hide default menu
+hide_streamlit_style = """
+<style>
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+</style>
+"""
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+# Full Screen mode
+# enable_fullscreen_content()
 
-st.set_option("deprecation.showfileUploaderEncoding", False)
 
-st.title("HR Analytics")
+# MULTI-APPLICATION
+app = MultiApp()
+# Add all your application here
+app.add_app("Home", home.app)
+app.add_app("How it works?", how_it_works.app)
 
-image = st.file_uploader("Choose an image")
 
-style = st.selectbox("Choose the style", [i for i in STYLES.keys()])
-
-if st.button("Style Transfer"):
-    if image is not None and style is not None:
-        files = {"file": image.getvalue()}
-        res = requests.post(f"http://backend:8080/{style}", files=files)
-        img_path = res.json()
-        image = Image.open(img_path.get("name"))
-        st.image(image)
-
-        displayed_styles = [style]
-        displayed = 1
-        total = len(STYLES)
-
-        st.write("Generating other models...")
-
-        while displayed < total:
-            for style in STYLES:
-                if style not in displayed_styles:
-                    try:
-                        path = f"{img_path.get('name').split('.')[0]}_{STYLES[style]}.jpg"
-                        image = Image.open(path)
-                        st.image(image, width=500)
-                        time.sleep(1)
-                        displayed += 1
-                        displayed_styles.append(style)
-                    except:
-                        pass
+# Sidebar Menu
+st.sidebar.title('Navigation')
+# The main app
+app.run()
+# Sidebar Menu
+st.sidebar.title("Contribute")
+st.sidebar.subheader("Jupyter Notebook")
+st.sidebar.markdown("Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text.")
+st.sidebar.markdown("[GitHub link](https://www.google.com)")
+st.sidebar.subheader("Frontend")
+st.sidebar.markdown("Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science.")
+st.sidebar.markdown("[GitHub link](https://www.google.com)")
+st.sidebar.subheader("Backend")
+st.sidebar.markdown("FastAPI is a modern, fast (high-performance), web framework for building APIs.")
+st.sidebar.markdown("[GitHub link](https://www.google.com)")
