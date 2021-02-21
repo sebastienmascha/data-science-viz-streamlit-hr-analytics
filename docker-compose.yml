@@ -3,15 +3,27 @@ version: '3'
 services:
   frontend:
     build: frontend
-    ports:
-      - 8501:8501
     depends_on:
       - backend
     volumes:
         - ./storage:/storage
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hr_analytics.rule=Host(`hr.smascha.ai`)"
+      - "traefik.http.routers.hr_analytics.entrypoints=websecure"
+      - "traefik.http.routers.hr_analytics.tls.certresolver=mytlschallenge"
+    networks:
+      - proxy
+    restart: always
+
   backend:
     build: backend
-    ports:
-      - 8080:8080
     volumes:
       - ./storage:/storage
+    networks:
+      - proxy
+    restart: always
+
+networks:
+  proxy:
+    external: true
