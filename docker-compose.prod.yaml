@@ -11,7 +11,7 @@ services:
         - ./storage:/storage
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.hr_analytics.rule=Host(`hr.smascha.ai`)"
+      - "traefik.http.routers.hr_analytics.rule=Host(`hr-analytics.smascha.ai`)"
       - "traefik.http.routers.hr_analytics.entrypoints=websecure"
       - "traefik.http.routers.hr_analytics.tls.certresolver=mytlschallenge"
     networks:
@@ -22,6 +22,11 @@ services:
     build: backend
     volumes:
       - ./storage:/storage
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.hr_api.rule=Host(`hr-api.smascha.ai`)"
+      - "traefik.http.routers.hr_api.entrypoints=websecure"
+      - "traefik.http.routers.hr_api.tls.certresolver=mytlschallenge"
     networks:
       - proxy
     restart: always

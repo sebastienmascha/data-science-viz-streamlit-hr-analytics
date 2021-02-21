@@ -4,13 +4,13 @@ from apps import home, how_it_works # import your app modules here
 
 # CONFIGURATIONS
 # Hide default menu
-hide_streamlit_style = """
-<style>
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-</style>
-"""
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+# hide_streamlit_style = """
+# <style>
+# #MainMenu {visibility: hidden;}
+# footer {visibility: hidden;}
+# </style>
+# """
+# st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 # Full Screen mode
 # enable_fullscreen_content()
 
@@ -33,7 +33,8 @@ st.sidebar.markdown("Jupyter Notebook is an open-source web application that all
 st.sidebar.markdown("[GitHub link](https://www.google.com)")
 st.sidebar.subheader("Frontend")
 st.sidebar.markdown("Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science.")
-st.sidebar.markdown("[GitHub link](https://www.google.com)")
+st.sidebar.markdown("[GitHub sources & docs](https://www.google.com)")
 st.sidebar.subheader("Backend")
 st.sidebar.markdown("FastAPI is a modern, fast (high-performance), web framework for building APIs.")
-st.sidebar.markdown("[GitHub link](https://www.google.com)")
+st.sidebar.markdown("[GitHub sources & docs](https://www.google.com)")
+st.sidebar.markdown("[Swaggger docs](https://hr.smascha.ai:8080/docs)")

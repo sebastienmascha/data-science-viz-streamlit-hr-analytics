@@ -6,6 +6,7 @@ def app():
     st.title('How it works?')
     st.markdown("### Context")
     st.markdown("### Research questions")
+    st.markdown("### Data Science Pipeline - Dataiku")
     st.markdown("### Analysis")
     st.markdown("### Our Model")
     st.markdown("### Deployment")

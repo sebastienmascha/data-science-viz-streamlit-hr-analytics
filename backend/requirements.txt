@@ -1,6 +1,7 @@
 # backend/requirements.txt
 
 fastapi
+pydantic
 uvicorn
 # python-multipart
 numpy
