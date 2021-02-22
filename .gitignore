@@ -1,6 +1,6 @@
 **/.vscode
 **/__pycache__
-*/models/
+# */models/ TO DO: add download_models.sh script
 storage/
 .venv/
 env/
