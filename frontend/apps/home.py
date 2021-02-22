@@ -5,6 +5,10 @@ import streamlit as st
 import requests
 
 
+API_URL = "https://hr-api.smascha.ai"
+# API_URL = "http://localhost:8080"
+
+
 def app():
     st.title("HR Analytics")
     st.info("Enter your profile and receive feedback on your carreer! 🚀")
@@ -77,7 +81,7 @@ def app():
 
     if st.button("Predict"):
         print("PRESSSSSS")
-        response = requests.post('http://localhost:8080/rf_pipe', headers=headers, json=user_input_json)
+        response = requests.post(API_URL + '/rf_pipe', headers=headers, json=user_input_json)
         print(response.text)
         response_json = json.loads(response.text)
         if response_json['prediction'] == "1":
