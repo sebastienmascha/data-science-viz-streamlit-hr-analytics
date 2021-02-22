@@ -1,6 +1,6 @@
 import streamlit as st
 from multiapp import MultiApp
-from apps import home, how_it_works # import your app modules here
+from apps import home, how_it_works, analysis # import your app modules here
 
 # CONFIGURATIONS
 # Hide default menu
@@ -19,6 +19,7 @@ from apps import home, how_it_works # import your app modules here
 app = MultiApp()
 # Add all your application here
 app.add_app("Home", home.app)
+app.add_app("Research & Analysis", analysis.app)
 app.add_app("How it works?", how_it_works.app)
 
 
