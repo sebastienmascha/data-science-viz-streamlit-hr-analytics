@@ -32,10 +32,10 @@ def handle_map_dictionary(value, dictionary):
 
 def app():
     st.title("HR Analytics")
-    st.info("Enter your profile and receive feedback on your carreer! 🚀")
+    st.info("Enter your profile and receive feedback on your carreer! 🚀 We don't store your data 🔐")
     st.markdown("## What is your profil?")
 
-    st.markdown("#### User information")
+    st.markdown("#### User Details")
     # Gender
     selected_gender = st.radio("Gender:", options=['Woman', 'Man', 'Other'])
     selected_gender = handle_map_dictionary(selected_gender, {'Woman':'Female', 'Man':'Male'})
@@ -53,7 +53,7 @@ def app():
     # Major Discipline
     selected_major_discipline = create_custom_selectbox(title="What is your major discipline?", options=['STEM', 'Business Degree', 'Arts', 'Humanities', 'No Major', 'Other'])
 
-    st.markdown("#### Professional")
+    st.markdown("#### Experience")
     # Relevent Experience
     selected_relevent_experience = str(st.checkbox("Do you have a relevant experience?", value=True))
     selected_relevent_experience = handle_map_dictionary(selected_relevent_experience, {'True':'Has relevent experience', 'False':'No relevent experience'})
