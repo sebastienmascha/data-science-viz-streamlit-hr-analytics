@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-API_URL = "https://hr-api.smascha.ai"
-# API_URL = "http://localhost:8080"
+# API_URL = "https://hr-api.smascha.ai"
+API_URL = "http://localhost:8080"
 
 
 def create_custom_selectbox(title: str, options: List, index: int = 0):
@@ -70,7 +70,15 @@ def app():
 
 
     st.markdown("## Are you looking for a job change?")
-    if st.button("Predict using Random Forest Classifier (accuracy: 96%)"):
+    selected_model = st.radio("Select the AI model you wish to use:", options=['Random Forest (accuracy: 96%)', 'Decision Tree (accuracy: 87%)', 'Neural Networks (accuracy: 89%)'])
+    selected_model = handle_map_dictionary(selected_model, {'Random Forest (accuracy: 96%)':'rf_pipe', 'Decision Tree (accuracy: 87%)':'dt_pipe', 'K-Nearest-Neighbour (accuracy: 85%)':'knn_gscv', 'Neural Networks (accuracy: 89%)':'mlp_final', 'Support Vector Machine (accuracy: 82%)':'svclassifier'})
+    st.markdown("""
+        Soon available: 
+        - K-Nearest-Neighbour (accuracy: 85%)
+        - Support Vector Machine (accuracy: 82%)
+        """)
+
+    if st.button("Start the Prediction"):
         print("\n----- Handle Prediction -----")
         headers = {
             'accept': 'application/json',
@@ -90,7 +98,7 @@ def app():
             "city_development_index": selected_city_development_index,
             "city": selected_city,
             }
-        response = requests.post(API_URL + '/rf_pipe', headers=headers, json=user_input_json)
+        response = requests.post(API_URL + '/' + selected_model, headers=headers, json=user_input_json)
         print(response.text)
         response_json = json.loads(response.text)
         if response_json['prediction_class'] == 1:
@@ -127,7 +135,7 @@ def app():
                     "city_development_index": selected_city_development_index,
                     "city": selected_city,
                     }
-                response = requests.post(API_URL + '/rf_pipe', headers=headers, json=user_input_json)
+                response = requests.post(API_URL + '/' + selected_model, headers=headers, json=user_input_json)
                 response_json = json.loads(response.text)
                 list_proba.append(response_json['prediction_proba_1'])
             d = {'Education Level': LIST_EDUCATION_LEVEL, 'Probaility: looking for a job': list_proba}
@@ -160,7 +168,7 @@ def app():
                     "city_development_index": selected_city_development_index,
                     "city": selected_city,
                     }
-                response = requests.post(API_URL + '/rf_pipe', headers=headers, json=user_input_json)
+                response = requests.post(API_URL + '/' + selected_model, headers=headers, json=user_input_json)
                 response_json = json.loads(response.text)
                 list_proba.append(response_json['prediction_proba_1'])
             d = {'Year to stay in current company': [*range(0, YEAR_IN_COMPANY_MAX, YEAR_IN_COMPANY_STEP)], 'Probaility: looking for a job': list_proba}
@@ -196,7 +204,7 @@ def app():
                     "city_development_index": selected_city_development_index,
                     "city": selected_city,
                     }
-                response = requests.post(API_URL + '/rf_pipe', headers=headers, json=user_input_json)
+                response = requests.post(API_URL + '/' + selected_model, headers=headers, json=user_input_json)
                 response_json = json.loads(response.text)
                 list_proba_for_training_hours.append(response_json['prediction_proba_1'])
             d_training_hours = {'No of training hours': [*range(0, TRAINING_HOURS_MAX, TRAINING_HOURS_STEP)], 'Probaility: looking for a job': list_proba_for_training_hours}
