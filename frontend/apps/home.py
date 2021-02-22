@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-# API_URL = "https://hr-api.smascha.ai"
-API_URL = "http://localhost:8080"
+API_URL = "https://hr-api.smascha.ai"
+# API_URL = "http://localhost:8080"
 
 
 def create_custom_selectbox(title: str, options: List, index: int = 0):
