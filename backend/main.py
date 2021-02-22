@@ -21,6 +21,8 @@ async def predict_person_job_change(ai_model: str, person_data: PersonData):
     """
     Predict the probability of an candidate looking for a new job.
     """
+    print("\n----- Handle Prediction -----")
+    print(person_data)
     model = config.STYLES[ai_model]
     start = time.time()
     person_data_encoded = encode(person_data)

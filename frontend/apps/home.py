@@ -5,6 +5,8 @@ import streamlit as st
 import requests
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 # API_URL = "https://hr-api.smascha.ai"
@@ -69,7 +71,7 @@ def app():
 
     st.markdown("## Are you looking for a job change?")
     if st.button("Predict using Random Forest Classifier (accuracy: 96%)"):
-        print("----- Handle Prediction -----")
+        print("\n----- Handle Prediction -----")
         headers = {
             'accept': 'application/json',
             'Content-Type': 'application/json',
@@ -100,3 +102,46 @@ def app():
         else:
             st.warning("⚠️ The probability that you're looking for a job is: " + str(response_json['prediction_proba_1']))
         st.info("Our random forest model took {:.2f} second to process! ⚡".format(response_json['time']))
+
+        st.markdown("## Should you continue your job or take more training hours?")
+        
+
+        fig, axes = plt.subplots(1, 2)
+        # Training Hours
+        list_proba_for_training_hours = []
+        TRAINING_HOURS_MAX = 200
+        TRAINING_HOURS_STEP = 10
+        with st.spinner('Wait for it... Processing in progress! ⚙️🕐'):
+            for i in range(0, TRAINING_HOURS_MAX, TRAINING_HOURS_STEP):
+                selected_training_hours = i
+                print(i)
+                user_input_json = {
+                    "gender": selected_gender,
+                    "relevent_experience": selected_relevent_experience,
+                    "enrolled_university": selected_enrolled_university,
+                    "education_level": selected_education_level,
+                    "major_discipline": selected_major_discipline,
+                    "experience": selected_experience,
+                    "company_size": selected_company_size,
+                    "company_type": selected_company_type,
+                    "last_new_job": selected_last_new_job,
+                    "training_hours": selected_training_hours,
+                    "city_development_index": selected_city_development_index,
+                    "city": selected_city,
+                    }
+                response = requests.post(API_URL + '/rf_pipe', headers=headers, json=user_input_json)
+                response_json = json.loads(response.text)
+                list_proba_for_training_hours.append(response_json['prediction_proba_1'])
+            d_training_hours = {'No of training hours': [*range(0, TRAINING_HOURS_MAX, TRAINING_HOURS_STEP)], 'Probaility: looking for a job': list_proba_for_training_hours}
+            df_training_hours = pd.DataFrame(data=d_training_hours)
+            sns.lineplot(ax=axes[0], data=df_training_hours, x="No of training hours", y="Probaility: looking for a job")
+            st.pyplot(fig)
+        max_proba_for_training_hours = max(list_proba_for_training_hours)
+        list_best_training_hours_no = [i for i, j in enumerate(list_proba_for_training_hours) if j == max_proba_for_training_hours]
+        st.markdown("You should take **" + str(list_best_training_hours_no) + "** training hours.")
+        if list_best_training_hours_no[0] < 50:
+            st.markdown("Sounds like you already have a great profil. You don't need much more training hours.")
+        else:
+            st.markdown("You have a very interresting profile but you lack of knowledge in Data Science field. \nYou should take more training hours.")
+
+        # Education level
