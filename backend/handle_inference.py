@@ -24,6 +24,11 @@ def encode(person_data: PersonData):
 def inference(model: str, person_data_encoded):
     model_name = f"{config.MODEL_PATH}{model}.joblib"
     model = load(model_name) 
-    prediction = model.predict(person_data_encoded)[0]
-    print("\nPrediction: " + str(prediction))
-    return str(prediction)
+    prediction_proba = model.predict_proba(person_data_encoded)[0]
+    prediction_proba_0 = prediction_proba[0]
+    prediction_proba_1 = prediction_proba[1]
+    prediction_class = 1 if prediction_proba_1 >= 0.5 else 0
+    print("Predicted Class: ", prediction_class)
+    print("Probability for class 0 : ", prediction_proba_0)
+    print("Probability for class 1 : ", prediction_proba_1)
+    return (prediction_class, prediction_proba_0, prediction_proba_1)

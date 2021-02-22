@@ -24,9 +24,9 @@ async def predict_person_job_change(ai_model: str, person_data: PersonData):
     model = config.STYLES[ai_model]
     start = time.time()
     person_data_encoded = encode(person_data)
-    prediction = inference(model, person_data_encoded)
+    (prediction_class, prediction_proba_0, prediction_proba_1) = inference(model, person_data_encoded)
 
-    return {"prediction": prediction, "time": time.time() - start}
+    return {"prediction_class": prediction_class, "prediction_proba_0": prediction_proba_0, "prediction_proba_1": prediction_proba_1, "time": time.time() - start}
 
 
 if __name__ == "__main__":
