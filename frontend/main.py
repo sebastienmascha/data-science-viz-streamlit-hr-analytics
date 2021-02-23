@@ -16,6 +16,7 @@ from apps import home, how_it_works, analysis # import your app modules here
 
 
 # MULTI-APPLICATION
+# st.set_page_config(layout="wide")
 app = MultiApp()
 # Add all your application here
 app.add_app("Home", home.app)

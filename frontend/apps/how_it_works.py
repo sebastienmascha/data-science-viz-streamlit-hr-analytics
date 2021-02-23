@@ -1,8 +1,13 @@
+import os
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 
 from .toc import Toc
+
+
+PATH_RES_FOLDER = os.getcwd() + "/res/"
 
 
 def toc_content(toc: Toc):
@@ -95,6 +100,38 @@ def toc_content(toc: Toc):
     # ----- Data Science Pipeline -----
     toc.title("Data Science Pipeline")
     toc.header("Workspace: Dataiku & Colab")
+    st.markdown("""
+        To implement our Data Science life-cycle, we decided to use [Dataiku](https://www.dataiku.com) and [Google Colab](https://colab.research.google.com/).
+
+        We installed Dataiku on a Ubuntu 18.04 machine using Docker and Traefik: [https://data.smascha.ai](https://data.smascha.ai)
+
+        We used Google Colab thanks to Google Cloud Platform available at: [https://colab.research.google.com/](https://colab.research.google.com/)
+
+        ### What is Dataiku?
+
+        Dataiku is a cross-platform desktop application that includes a broad range of tools, such as notebooks (similar to Jupyter Notebook), workflow management (similar to Apache Airflow), and automated machine learning.
+
+        We used Dataiku to quickly prepare our data and analyse categorical and numerical variables. Moreover, we wanted to quickly evaluate variety of algorithms before implementing them from scratch.
+
+        With Dataiku you can train multiple models at the same time, while running Grid search to optimize parameters in the background.
+
+        """)
+    st.image(PATH_RES_FOLDER + "img/Dataiku-quick-modeling.png", use_column_width='auto')
+    st.image(PATH_RES_FOLDER + "img/Dataiku-models-results.png")
+    st.markdown("""
+        Finally, we obtain great interpretation and visualization: feature importance, confusion matrix, ROC curve, density/decision/lift charts, detailed metrics.
+        """)
+    st.image(PATH_RES_FOLDER + "img/Dataiku-model-interpretation.png")
+    st.markdown("""
+        ### What is Google Colab?
+        Colaboratory, or “Colab” for short, is a product from Google Research. Colab allows anybody to write and execute arbitrary python code through the browser, and is especially well suited to machine learning and data analysis.
+
+        Easy sharing, just like other Google services, you can share the results of your work with others just like you use Google Docs.
+
+        Moreover, you have access to CPU, GPU and TPU (with limited usage of course, else you can pay for better performance).
+        """)
+    st.image(PATH_RES_FOLDER + "img/GColab-overview.png")
+
     toc.header("Methods & Results")
     toc.subheader("Classification KNN")
     st.markdown("""
@@ -163,7 +200,6 @@ def toc_content(toc: Toc):
 
 
 def app():
-
     toc = Toc()
     st.sidebar.markdown("# Table of Contents")
     toc_content(toc)
