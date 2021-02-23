@@ -96,6 +96,10 @@ def toc_content(toc: Toc):
     toc.title("Data Science Pipeline")
     toc.header("Workspace: Dataiku & Colab")
     toc.header("Algorithms presentation & Results obtained")
+    toc.subheader("Note")
+    st.markdown("""
+    You can find the complete study on the notebook. In particular, you will find more details on the methods used to develop our algorithms and optimize the hyperparameters. Finally, you will find the graphical analysis of the results as well as the interpretations.
+    """)
     toc.subheader("Classification KNN")
     st.markdown("""
         **Objective:**
