@@ -1,13 +1,8 @@
-import os
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 
 from .toc import Toc
-
-
-PATH_RES_FOLDER = os.getcwd() + "/res/"
 
 
 def toc_content(toc: Toc):
@@ -100,39 +95,7 @@ def toc_content(toc: Toc):
     # ----- Data Science Pipeline -----
     toc.title("Data Science Pipeline")
     toc.header("Workspace: Dataiku & Colab")
-    st.markdown("""
-        To implement our Data Science life-cycle, we decided to use [Dataiku](https://www.dataiku.com) and [Google Colab](https://colab.research.google.com/).
-
-        We installed Dataiku on a Ubuntu 18.04 machine using Docker and Traefik: [https://data.smascha.ai](https://data.smascha.ai)
-
-        We used Google Colab thanks to Google Cloud Platform available at: [https://colab.research.google.com/](https://colab.research.google.com/)
-
-        ### What is Dataiku?
-
-        Dataiku is a cross-platform desktop application that includes a broad range of tools, such as notebooks (similar to Jupyter Notebook), workflow management (similar to Apache Airflow), and automated machine learning.
-
-        We used Dataiku to quickly prepare our data and analyse categorical and numerical variables. Moreover, we wanted to quickly evaluate variety of algorithms before implementing them from scratch.
-
-        With Dataiku you can train multiple models at the same time, while running Grid search to optimize parameters in the background.
-
-        """)
-    st.image(PATH_RES_FOLDER + "img/Dataiku-quick-modeling.png", use_column_width='auto')
-    st.image(PATH_RES_FOLDER + "img/Dataiku-models-results.png")
-    st.markdown("""
-        Finally, we obtain great interpretation and visualization: feature importance, confusion matrix, ROC curve, density/decision/lift charts, detailed metrics.
-        """)
-    st.image(PATH_RES_FOLDER + "img/Dataiku-model-interpretation.png")
-    st.markdown("""
-        ### What is Google Colab?
-        Colaboratory, or “Colab” for short, is a product from Google Research. Colab allows anybody to write and execute arbitrary python code through the browser, and is especially well suited to machine learning and data analysis.
-
-        Easy sharing, just like other Google services, you can share the results of your work with others just like you use Google Docs.
-
-        Moreover, you have access to CPU, GPU and TPU (with limited usage of course, else you can pay for better performance).
-        """)
-    st.image(PATH_RES_FOLDER + "img/GColab-overview.png")
-
-    toc.header("Methods & Results")
+    toc.header("Algorithms presentation & Results obtained")
     toc.subheader("Classification KNN")
     st.markdown("""
         **Objective:**
@@ -180,50 +143,92 @@ def toc_content(toc: Toc):
     st.image("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATMAAACkCAMAAADMkjkjAAAB+FBMVEX///8AAADm5uYMDAyrq6tgYGD39/efn5/5iyTsAAD6xKL4//////36593+/v+MjIz71L3tlEzY1tXqmFjtCBX///jw7+3zg4X///L19fXz///uOD3wWFw/eLnz9flXhsDm/f/r7/XR0tO65/+Ivdzt+P96cI797/DuLjT0kpT/6cTsABDtHCSGsNj//9v+9/eht9fD0ORIe7h9l7q0u8b2kT2SrNL2jjGtg2es0u///+bg/f9ulMb4mEsxcrj88OlYg7ikr8CCocxzkbr3qXGFPwDDxsrWvq3J4vLh5/GZqL71sYNSUlKKfYHM6fC4moWKbGzixqbw2saWm657hJfJx7u/mG+v0tqmv9KkfU2t0vxUWHbJ3epKS1iXdFiQYDfX0a9JV41yoKIyZJWCRRtVcJnaro3PtYGRkYY+OUlKTnXz6L4+P3AAAEAlAACKaVpdnL2eZktuVEvGqpPPoHCsk4KClJlgRk5mi7CZt8OZopkpH19FLUm+1/NrLjZPYpl8TEBVYoZuoLlven2umpZdK0PM9uS0tLQAGzwvNT0kIBuDhafdq4vNrp6cg4bXyL9nLyYzW5YqdaakkGoVOFgOAChTNRS+xLG6jV/a4sxrXG74wcL72dpmIwA7gadncpycbzLMhl9pGxaIdXHhu6TXhk8UITIsACyuFiylAAALy0lEQVR4nO2diV8aVx7An1RRyXALi7aAEK2pjXIojqI4RlkQJx6MSkhCElsrNUm72UZN7LbdJtHWbaKZps0256abjd39N3cOkFsFZh4Mvu8nnzCXMHw/75p3/AAAgUAgEAgEAoFAIBAIBAKBQCAQiNrEKJPJK30PUuN8XV09lA9STs/kHpydOgXlw4WlAZYzMBdKbRv6eVfhcTifLSwiOaPmT1HznelHvAuL5w4SlelD/lzkwjaf+ojGTiqaPNvVJcIdCYg4zgyBi5d6LzNelPUsMeYQdSV2dejg/Ie8vmt9S59wG7rZT6eSJ7ua05x1LwOiP+vdI8vA8FlPYruDvWgFahYXK2/GezSsIUcri4rZ+rwHXE2kpKB69bpazYjsvdF2k3cGbn7RlvjLrpaW91nOfMTusc5cRKD/lImOYXR/m3IxBiJfDnf/pcewGACmwK0hYidUI84Uf11kJVBqFhez9dWM6fbM2qqTO5tIZ+FNsD5ObLDH4jeSX/v9j8+2sDT/id1jnIVXwiuRjsE7dy/QV3vWNy3Y4GrP7GrfbHR2aDA6+PW7v33zojac9X77Xca+6e8XZjt6vze85AqyRHkWX6C32pWRAYDRgav9k/yVjjMff8CRTGfdm+EexYN7UfvS/cj4eg8w3Jq5/ftS361JxYO77ZFPv7UHYKQzo4X9xyGWM++jzH2TbtEFbo6BORu7h9nZ7ApkVD+TGBUDgLADpSt5qeNsenl2Xf2sL9wTHg9vLSy+XP1+zQkM72ae94QnqK2tzvjW3ejsVl/3pujOqI1lthzlEMcZEdjuzHPY+0Xv/baco/GBrANdDuHvqHx+aI8ncoI4zkyNobzHKfVk7rHGxtyDVchXP86zLyqYbVqps97HNSWl68wC/yE5fFCESNOZy+2E/IlG+fxBSSxFZ6Fxcx9f8cJjbTNVqUnPmcXpHuuvaAeW5Jy5rO4pXWW7/CTmLDRi7gsYoXzUTqDQGUk5kztHoWVLdV1joVNScuZyQ8yW8sYacBYaccPKlhzSd8bUliP9MpgNjEY1/yrLxni+rq4x52j1wdSWCzu6wudFkKmz869172VTV5d7rOr4xxPzyk8PHxa+oE4mvLPCMHlzB+bnlYLTymTLSt9EGlVenjkcjsCjR41BZQ4OjorcVPU5UxFKSqNQkH6tr+k4UNDvsJqcEUqNwq/14LhHq9eT5O7u/t7j+9PbtF2Xhd1O8+wz6ODcm8tkT/ajVokzh1JDan2MK//ufpDWsTWkrdUSZZ4t7UaVKqtWVCWQc0Bpf5jm793ZS47UVIMzgvHl8el3GVkym8WSdMQ3YrEK31ySn4epK+38ZsWdOTR+j4fxxepKTzKWATNTW+Y11mrJ/1YYc9yROMe9Yq2C3Wb3ExBeSWxX2Bmh8OH+fVpmy85i3LNl/q+MDR7MYcDY6R5ep+kc1yEY/qYTu/gLf0YxxvynfNku1I0qfjHdTg71VNQZpsA9u7Qst0gKjYwWfrZknZm25zuJ7YW2HePe/K9PY/2qoHoSxP855P1tDNuY7zRt3xrxbkcJ4ZxFplJDZpV0pmny7Ovy5DPLwOhhjVjW2eBQePPW6eczc8/ut4VHvJeDK4YQiNx5FFxdXu8Ib852hB9cu/PDBcGcGa4Np3Yq50zpx3ft+XJf1Gw9d1iXT8LZwtzw4MzcDHV5aYxxNmGwgedDF2+8+CTS0b25MRR/8POMTLi8iV11pXYq5kzj0dO2PO0EtifWfmiXD7a3NcXmTUp9e3Jbtz3lnbbPy9eYrLM2GZ7yPjKtLoSU6ukopZ4yNuaO2gtAhZxhJL6bLy3ZBswTx+2JJXR3h4++SgQq48zh9+zn6b9Ruaxjh2bLDJSB/BMcRKcizgitj85T9kMcICmLSjgjfNo8yvjaEvJQb0lUwBmjLM8ouMvsPn62rCzwnRE+vS5HWcxq7ivQ7K8+oDsj9LnKbONsbVn80/irV6+FuanigO0M82vprByocrqLqC3TaebnKcMGtjPSl60sdmQjtiDNLSfBmQIPZtaYXCO21E6yE+GMaopnKouWmi05ToIzAidt6fsha8nZkuMEOMO02vQeHsv46ER5fdcnwBnpoVOtDK62LGte1OtXzS0fvKrAGjyIzjT4fqowY6cr5u09Oz5dZ1vOVqSxAc+Z0kce5Ey2ERswlvts6TjT/NFR1xAbp8v8lFygOVP59cnRW3l5tWWKriNTGfX1vyTsTHFQmDGNWCZbwhq3/LN0nSmTLTNhsuXxka4zlc/PF2ZOM1Nbwuwkk64z0sMVZjG3udBIr1hI1pmmKSiHny0ZTNtqdfToy4oDijOlh7QAedmN2GoBhjOHXi8DrpGyG7HVAgRnDr+PFi5bYntT1PR3R18nIhCckZ4gW1sKNEBC6O45FW8AG6WDZZJpIpdDKbcgvjMFvi3oAAn1O4i/ST8QaCydguvADkN0Zxr8MdvlI9wbrveAf7MT0A7SGXTEdmbE346VMqRUmOcrv44UcbnJRaVN6SH6U7NeHCUlMiC2M4z0eTzCjvSapifzTE0jCk3dMD3uTAYMw2SdwPAyLXoJNZX/b45CVGeh8bf4LC1sA4O6kht7zvDst47E2ez4JopL4PM703wO3pgE3oZV9gpsdoqNhDJY2rwiEZ1ZnO4Fz65N4Fasw54bIYYIPU84605k2/DWAlhiirtoZAgMRuMdhA1Q6tsLTs2Kd+FUKzCY7sYsAEQulXQL4jlzWd2PPf4CU6yFhnfW2ro0IWdbgeFN8B8+DUWGTC9D716o3w1z6Wz9Ujy6tgxeP2sI2JiTpT2LiuXMNj46sYf7Yc2M4p0F6zfu1ze2A/DV1lxibnd3j2GnfrLbGT8NMF0noOv7gWkeKF1eNjriXGnTIMVxpmIXjtM+aMpAZt40vZsEyU7hNfYR3duQNrN27zpfkWIbJTZURHHGxXMw6vWwlGH0Z2/4AIaJ8mx2Qe0qeLUKqJIbpSGCM3664inSoxT4jQtjtCTiuWF8jYMZxSxHBXeWDLOiadqXwpzFUhDaWTLMihInIVWZ8BHWWYjr8mGelOTwCjP4COlM7jQnni1VJA5nKWpFENCZKzVAomkKCvSm1YhgztilcMm+awrflWLs8eMikDMLly0TFSUBsTFbCYRxlhGUrFWrr6ZoGMIjhDO+EZvsV1T5fTVc/rOU74zPlqkeHxKna7Uxm6BsZ1mxAlW1r6xcZ9zC8fSOWLIpWOvKynMmHxgdy1gKJ/fjta+sLGcuc1asQELvyV5lUouU7oxfOJ4+CscuMa/9VFa6M9uAeyRzzY1DgZO5iwxrkdKcqXIi66o0Ws9+bTdlDyjJWW48B8qP+/OFF6lJSnBmGTBnTidwaPS4PiiJpeSCULwzrssnlS2VCn8TTtInx1jxzrilcLwxFUEp/HiTj9yz5wvIUrsU54wd6Q0ouYCLpNaDe/RknNbliStV22Q7I/wkgyKBJgG/R5Jv9Vqfz+fxJIII6nQyy0kTBnKdUYwzv55Hmwaz+8cfb9+us4EpaZpJXDJba03rsjdsFfp62c5aE8GY2eCc6aE6ZYEJ88o5u8xma2Vc1bIsHvn5nfOFgh0ftzxzWa21Mbn/mBh/KhzY/Xixo5lG7ICuWiJ4QsH4UK5OJqZAXQk8MS//t5S/g06DcNLUDx8ms1Xxzt5btrqfivD9xEBAZ6pUSVS0s6dus1SMCeosDXnmbxUc8ZsLRvuEeaL/kN86qDLgDKseWm9ysQJPUm15PA5zxkU/qo2lcIJS2JllYLT06Ec1TUFnUbP7nKBrbmqHAs5iVugLx6VDXmf8CtUK3I00yONMvIXjGN1J2KU/My3XWUy8heP07IP6mCjvDJVsZ2ysQPHiOfT+L3dRnPTIdKaKuq1i1pbdX4oSaB0yGc5iqQESUTDNX7xQeE2NZEhzZis7VuAROLbbqfkaGDhOc+YSeOF4zZLmTIYascej4r/vJEGQs+JBzooHOSse5Kx4kLPiQc6KBzkrHuSseM4jZ0VjD+yckBnqCAQCgUAgEAgEAoFAIBAIBKIc/g8RDAD6CH002wAAAABJRU5ErkJggg==")
     st.image("https://miro.medium.com/max/800/1*UgYbimgPXf6XXxMy2yqRLw.png")
 
+    toc.subheader("Naive Bayes")
+    st.markdown("""
+    Naive Bayes algorithms are a set of supervised machine learning algorithms based on the Bayes probability theorem. Naive Bayes algorithms assume that there’s no correlation between features in a dataset used to train the model.
+    
+    **Naive**
+    
+    The word naive implies that every pair of features in the dataset is independent of each other. All naive Bayes classifiers work on the assumption that the value of a particular feature is independent from the value of any other feature for a given the class.
+    
+    **Bayes probability theorem**
+    
+    The Bayes theorem describes the probability of a feature, based on prior knowledge of situations related to that feature.
+    """)
+    st.image("https://miro.medium.com/max/6190/1*39U1Ln3tSdFqsfQy6ndxOA.png")
+
+    toc.subheader("Neural Networks")
+    st.markdown("""
+    We have use the MLP function from scikit learn to implement our neural network.
+    
+    **MLP**
+    
+    For this algorithm, we are going to use the MLPClassifier model from sklearn.neural_network.
+    
+    MLP stands for Multi-layer Perceptron
+    
+    Multi-layer Perceptron is a supervised learning algorithm that learns a function by training on a dataset. Given a set of features and a target, it can learn a non-linear function approximator for either classification or regression. Here we will use classification because our problem suggests it to use it. It is different from logistic regression, in that between the input and the output layer, there can be one or more non-linear layers, called hidden layers. It will be a hyperparameter that we will adjust later.)
+    """)
+    st.image("https://miro.medium.com/max/3446/1*-IPQlOd46dlsutIbUq1Zcw.png")
+
+    toc.subheader("SVM")
+    st.markdown("""
+    SVM stands for Support Vector Machine.
+    
+    In SVM, the line that is used to separate the classes is referred to as hyperplane. The data points on either side of the hyperplane that are closest to the hyperplane are called Support Vectors which is used to plot the boundary line.
+    
+    In SVM Classification, the data can be either linear or non-linear. There are different kernels that can be set in an SVM Classifier. For a linear dataset, we can set the kernel as 'linear'. On the other hand, for a non-linear dataset, there are two kernels, namely 'rbf' and 'polynomial'. In this, the data is mapped to a higher dimension which makes it easier to draw the hyperplane. Afterwards, it is brought down to the lower dimension. In this section we are going to use the SVC model from scikit learn and try diffenrent kernels to see which one is the best for our data)
+    """)
+    st.image("https://chrisalbon.com/machine_learning/support_vector_machines/svc_parameters_using_rbf_kernel/svc_parameters_using_rbf_kernel_17_0.png")
+
+    toc.subheader("K-Means")
+    st.markdown("""
+    K-Means is a cluster analysis: cluster analysis or clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar to each other than to those in other groups (clusters). Clustering is unsupervised algorithm which means there is no label data points.
+
+    K-means clustering aims to partition data into k clusters in a way that data points in the same cluster are similar and data points in the different clusters are farther apart.
+    Similarity of two points is determined by the distance between them.
+    There are many methods to measure the distance. Euclidean distance is one of most commonly used distance measurements.
+    """)
+    st.image("https://static.javatpoint.com/tutorial/machine-learning/images/k-means-clustering-algorithm-in-machine-learning.png")
+
+    toc.subheader("Decision tree & Random forest")
+    st.markodown("""
+    Decision trees and random forests are supervised learning algorithms used for both classification and regression problems. In our case we are dealing with a binary classification problem. These two algorithms are best explained together because random forests are a bunch of decision trees combined.
+
+    A decision tree is a supervised machine learning algorithm that can be used for both classification and regression problems. A decision tree is simply a series of sequential decisions made to reach a specific result.
+    """)
+    st.image("https://cdn.analyticsvidhya.com/wp-content/uploads/2020/05/rfc_vs_dt11.png")
+
+    st.markdown("""
+    Often, a single tree is not sufficient for producing effective results. This is where the Random Forest algorithm comes into the picture.
+
+    Random Forest is a tree-based machine learning algorithm that leverages the power of multiple decision trees for making decisions. As the name suggests, it is a “forest” of trees!
+
+    The Random Forest Algorithm combines the output of multiple (randomly created) Decision Trees to generate the final output.
+    """)
+    st.image("https://cdn.analyticsvidhya.com/wp-content/uploads/2020/02/rfc_vs_dt1.png")
+
     
     # ----- Deployment in Production -----
     toc.title("Deployment in Production")
     toc.header("Docker: FastAPI + Streamlit")
-    st.markdown("""
-        - Frontend - Streamlit: [http://hr-analytics.smascha.ai](http://hr-analytics.smascha.ai)
-        - API Documentation (Swagger OpenAPI Specification) - FastAPI: [http://hr-api.smascha.ai](http://hr-api.smascha.ai)
-        
-        FastAPI is a modern, fast (high-performance), web framework for building APIs with Python. FastAPI supports data validation via pydantic and automatic API documentation as well.
-
-        Streamlit, meanwhile, is an application framework that makes it easy for data scientists and machine learning engineers to create powerful user interfaces that interact with machine learning models.
-        """)
-    toc.subheader("API Documentation with Sagger")
-    st.image(PATH_RES_FOLDER + "img/FastAPI.png")
-
     toc.header("Load Balancer: Traefik")
-    st.markdown("""
-        - Reverse Proxy & Load Balancer - Traefik: [http://smascha.ai:8080](http://smascha.ai:8080)
-
-        Traefik intercepts and routes every incoming request to the corresponding services.
-
-        Documentation V.2.2: [https://doc.traefik.io/traefik/v2.2](https://doc.traefik.io/traefik/v2.2)
-        """)
-    st.image(PATH_RES_FOLDER + "img/Traefik.png")
-    
     toc.header("Kubernetes")
-    st.markdown("""
-        Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
-
-        In fact, all our services (Frontend and Backend) are already containerized. They can be easily deployed to Kubernetes using Terraform.
-        """)
     toc.header("Data Persistence - Microsoft SQL")
     st.markdown("""
         We decided to keep this website as stateless for privacy reason.\n\
         Nevertheless, we planned and tested the implementation of Microsoft SQL.
-
-        We already deployed Microsoft SQL (version 2019) on smascha.ai thanks to the [official Docker image from Microsoft](https://hub.docker.com/_/microsoft-mssql-server).
         """)
+
+    # ----- Conclusion -----
+    toc.title("Deployment in Production")
 
     # ----- References -----
     toc.title("References")
 
 
 def app():
+
     toc = Toc()
     st.sidebar.markdown("# Table of Contents")
     toc_content(toc)
