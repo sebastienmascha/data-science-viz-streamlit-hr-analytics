@@ -192,7 +192,7 @@ def toc_content(toc: Toc):
     st.image("https://static.javatpoint.com/tutorial/machine-learning/images/k-means-clustering-algorithm-in-machine-learning.png")
 
     toc.subheader("Decision tree & Random forest")
-    st.markodown("""
+    st.markdown("""
     Decision trees and random forests are supervised learning algorithms used for both classification and regression problems. In our case we are dealing with a binary classification problem. These two algorithms are best explained together because random forests are a bunch of decision trees combined.
 
     A decision tree is a supervised machine learning algorithm that can be used for both classification and regression problems. A decision tree is simply a series of sequential decisions made to reach a specific result.
