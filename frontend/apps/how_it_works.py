@@ -184,16 +184,40 @@ def toc_content(toc: Toc):
     # ----- Deployment in Production -----
     toc.title("Deployment in Production")
     toc.header("Docker: FastAPI + Streamlit")
+    st.markdown("""
+        - Frontend - Streamlit: [http://hr-analytics.smascha.ai](http://hr-analytics.smascha.ai)
+        - API Documentation (Swagger OpenAPI Specification) - FastAPI: [http://hr-api.smascha.ai](http://hr-api.smascha.ai)
+        
+        FastAPI is a modern, fast (high-performance), web framework for building APIs with Python. FastAPI supports data validation via pydantic and automatic API documentation as well.
+
+        Streamlit, meanwhile, is an application framework that makes it easy for data scientists and machine learning engineers to create powerful user interfaces that interact with machine learning models.
+        """)
+    toc.subheader("API Documentation with Sagger")
+    st.image(PATH_RES_FOLDER + "img/FastAPI.png")
+
     toc.header("Load Balancer: Traefik")
+    st.markdown("""
+        - Reverse Proxy & Load Balancer - Traefik: [http://smascha.ai:8080](http://smascha.ai:8080)
+
+        Traefik intercepts and routes every incoming request to the corresponding services.
+
+        Documentation V.2.2: [https://doc.traefik.io/traefik/v2.2](https://doc.traefik.io/traefik/v2.2)
+        """)
+    st.image(PATH_RES_FOLDER + "img/Traefik.png")
+    
     toc.header("Kubernetes")
+    st.markdown("""
+        Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+
+        In fact, all our services (Frontend and Backend) are already containerized. They can be easily deployed to Kubernetes using Terraform.
+        """)
     toc.header("Data Persistence - Microsoft SQL")
     st.markdown("""
         We decided to keep this website as stateless for privacy reason.\n\
         Nevertheless, we planned and tested the implementation of Microsoft SQL.
-        """)
 
-    # ----- Conclusion -----
-    toc.title("Deployment in Production")
+        We already deployed Microsoft SQL (version 2019) on smascha.ai thanks to the [official Docker image from Microsoft](https://hub.docker.com/_/microsoft-mssql-server).
+        """)
 
     # ----- References -----
     toc.title("References")
