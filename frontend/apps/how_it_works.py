@@ -273,12 +273,6 @@ def toc_content(toc: Toc):
         We already deployed Microsoft SQL (version 2019) on smascha.ai thanks to the [official Docker image from Microsoft](https://hub.docker.com/_/microsoft-mssql-server).
         """)
 
-    # ----- Conclusion -----
-    toc.title("Deployment in Production")
-
-    # ----- References -----
-    toc.title("References")
-
 
 def app():
 
