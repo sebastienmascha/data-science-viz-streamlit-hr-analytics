@@ -1,8 +1,13 @@
+import os
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 
 from .toc import Toc
+
+
+PATH_RES_FOLDER = os.getcwd() + "/res/"
 
 
 def toc_content(toc: Toc):
@@ -95,6 +100,29 @@ def toc_content(toc: Toc):
     # ----- Data Science Pipeline -----
     toc.title("Data Science Pipeline")
     toc.header("Workspace: Dataiku & Colab")
+    st.markdown("""
+        To implement our Data Science life-cycle, we decided to use [Dataiku](https://www.dataiku.com) and [Google Colab](https://colab.research.google.com/).
+        We installed Dataiku on a Ubuntu 18.04 machine using Docker and Traefik: [https://data.smascha.ai](https://data.smascha.ai)
+        We used Google Colab thanks to Google Cloud Platform available at: [https://colab.research.google.com/](https://colab.research.google.com/)
+        ### What is Dataiku?
+        Dataiku is a cross-platform desktop application that includes a broad range of tools, such as notebooks (similar to Jupyter Notebook), workflow management (similar to Apache Airflow), and automated machine learning.
+        We used Dataiku to quickly prepare our data and analyse categorical and numerical variables. Moreover, we wanted to quickly evaluate variety of algorithms before implementing them from scratch.
+        With Dataiku you can train multiple models at the same time, while running Grid search to optimize parameters in the background.
+        """)
+    st.image(PATH_RES_FOLDER + "img/Dataiku-quick-modeling.png", use_column_width='auto')
+    st.image(PATH_RES_FOLDER + "img/Dataiku-models-results.png")
+    st.markdown("""
+        Finally, we obtain great interpretation and visualization: feature importance, confusion matrix, ROC curve, density/decision/lift charts, detailed metrics.
+        """)
+    st.image(PATH_RES_FOLDER + "img/Dataiku-model-interpretation.png")
+    st.markdown("""
+        ### What is Google Colab?
+        Colaboratory, or “Colab” for short, is a product from Google Research. Colab allows anybody to write and execute arbitrary python code through the browser, and is especially well suited to machine learning and data analysis.
+        Easy sharing, just like other Google services, you can share the results of your work with others just like you use Google Docs.
+        Moreover, you have access to CPU, GPU and TPU (with limited usage of course, else you can pay for better performance).
+        """)
+    st.image(PATH_RES_FOLDER + "img/GColab-overview.png")
+
     toc.header("Algorithms presentation & Results obtained")
     toc.subheader("Note")
     st.markdown("""
@@ -216,12 +244,33 @@ def toc_content(toc: Toc):
     # ----- Deployment in Production -----
     toc.title("Deployment in Production")
     toc.header("Docker: FastAPI + Streamlit")
+    st.markdown("""
+    - Frontend - Streamlit: [http://hr-analytics.smascha.ai](http://hr-analytics.smascha.ai)
+    - API Documentation (Swagger OpenAPI Specification) - FastAPI: [http://hr-api.smascha.ai](http://hr-api.smascha.ai)
+    
+    FastAPI is a modern, fast (high-performance), web framework for building APIs with Python. FastAPI supports data validation via pydantic and automatic API documentation as well.
+        Streamlit, meanwhile, is an application framework that makes it easy for data scientists and machine learning engineers to create powerful user interfaces that interact with machine learning models.
+        """)
+    toc.subheader("API Documentation with Sagger")
+    st.image(PATH_RES_FOLDER + "img/FastAPI.png")
     toc.header("Load Balancer: Traefik")
+    st.markdown("""
+        - Reverse Proxy & Load Balancer - Traefik: [http://smascha.ai:8080](http://smascha.ai:8080)
+        Traefik intercepts and routes every incoming request to the corresponding services.
+        Documentation V.2.2: [https://doc.traefik.io/traefik/v2.2](https://doc.traefik.io/traefik/v2.2)
+        """)
+    st.image(PATH_RES_FOLDER + "img/Traefik.png")
     toc.header("Kubernetes")
+    st.markdown("""
+        Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+        In fact, all our services (Frontend and Backend) are already containerized. They can be easily deployed to Kubernetes using Terraform.
+        """)
     toc.header("Data Persistence - Microsoft SQL")
     st.markdown("""
         We decided to keep this website as stateless for privacy reason.\n\
         Nevertheless, we planned and tested the implementation of Microsoft SQL.
+
+        We already deployed Microsoft SQL (version 2019) on smascha.ai thanks to the [official Docker image from Microsoft](https://hub.docker.com/_/microsoft-mssql-server).
         """)
 
     # ----- Conclusion -----
