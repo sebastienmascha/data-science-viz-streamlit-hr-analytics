@@ -11,7 +11,7 @@ PATH_RES_FOLDER = os.getcwd() + "/res/"
 
 
 def toc_content(toc: Toc):
-    st.image(PATH_RES_FOLDER + "img/HR-Analysis.png")
+    st.image(PATH_RES_FOLDER + "img/HR-Analytics.png")
     toc.placeholder()
 
     # ----- HR Analytics: Job Change of Data Scientists -----
