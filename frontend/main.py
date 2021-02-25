@@ -30,13 +30,16 @@ st.sidebar.title('Navigation')
 app.run()
 # Sidebar Menu
 st.sidebar.title("Contribute")
-st.sidebar.subheader("Jupyter Notebook")
-st.sidebar.markdown("Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text.")
-st.sidebar.markdown("[Sources and analysis](https://github.com/sebastienmascha/data-science-viz-streamlit-hr-analytics)")
+
+st.sidebar.subheader("Backend")
+st.sidebar.markdown("FastAPI is a modern, fast (high-performance), web framework for building APIs.")
+st.sidebar.markdown("[API & Swagger docs](https://hr-api.smascha.ai/docs)")
+st.sidebar.markdown("[GitHub: sources & docs](https://github.com/sebastienmascha/data-science-viz-streamlit-hr-analytics)")
+
 st.sidebar.subheader("Frontend")
 st.sidebar.markdown("Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science.")
 st.sidebar.markdown("[GitHub: sources & docs](https://github.com/sebastienmascha/data-science-viz-streamlit-hr-analytics)")
-st.sidebar.subheader("Backend")
-st.sidebar.markdown("FastAPI is a modern, fast (high-performance), web framework for building APIs.")
-st.sidebar.markdown("[GitHub: sources & docs](https://github.com/sebastienmascha/data-science-viz-streamlit-hr-analytics)")
-st.sidebar.markdown("[Swagger API docs](https://hr-api.smascha.ai/docs)")
+
+st.sidebar.subheader("Jupyter Notebook")
+st.sidebar.markdown("Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text.")
+st.sidebar.markdown("[Sources and analysis](https://nbviewer.jupyter.org/github/sebastienmascha/data-science-viz-streamlit-hr-analytics/blob/main/Python3_6_Notebook.ipynb)")
