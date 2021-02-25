@@ -123,7 +123,7 @@ def toc_content(toc: Toc):
         """)
     st.image(PATH_RES_FOLDER + "img/GColab-overview.png")
 
-    toc.header("Algorithms presentation & Results obtained")
+    toc.header("Algorithms & Results")
     toc.subheader("Note")
     st.markdown("""
     You can find the complete study on the notebook, [here](https://github.com/sebastienmascha/data-science-viz-streamlit-hr-analytics/blob/main/Python3_6_Notebook.ipynb). In particular, you will find more details on the methods used to develop our algorithms and optimize the hyperparameters. Finally, you will find the graphical analysis of the results as well as the interpretations.
